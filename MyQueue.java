@@ -1,8 +1,7 @@
 /**
- * TODO: Add your file header
- * Name:
- * Email:
- * Sources used: Put "None" if you did not have any external help
+ * Name: Anh Bach
+ * Email: tbach@ucsd.edu
+ * Sources used: Oracle, Lecture Slides
  * 
  * This file contains a MyQueue class, which is an implementation for the Queue
  * ADT based on MyDeque. Elements can be added/removed from the queue in a FIFO
@@ -19,20 +18,24 @@ public class MyQueue<E> implements QueueInterface<E> {
     /**
      * Constructor to create new MyQueue that holds a MyDeque.
      * 
-     * @param capacity The max amount of elements this data structure can hold.
+     * @param capacity The max amount of elements 
+     * this data structure can hold.
      */
     public MyQueue(int capacity) {
-        // TODO: Add your implementation here
+        theQueue = new MyDeque<>(capacity);
     }
 
     /**
      * Checks whether or not the queue is empty.
      * 
-     * @return True if there are no elements in the queue, false otherwise.
+     * @return True if there are no elements in the queue, 
+     * false otherwise.
      */
     @Override
     public boolean empty() {
-        // TODO: Add your implementation here
+        if (theQueue == null || theQueue.size() == 0) {
+            return true;
+        }
         return false;
     }
 
@@ -43,7 +46,7 @@ public class MyQueue<E> implements QueueInterface<E> {
      */
     @Override
     public void enqueue(E element) {
-        // TODO: Add your implementation here
+        theQueue.addLast(element);
     }
 
     /**
@@ -55,8 +58,7 @@ public class MyQueue<E> implements QueueInterface<E> {
      */
     @Override
     public E dequeue() {
-        // TODO: Add your implementation here
-        return null;
+        return theQueue.removeFirst();
     }
 
     /**
@@ -67,8 +69,7 @@ public class MyQueue<E> implements QueueInterface<E> {
      */
     @Override
     public E peek() {
-        // TODO: Add your implementation here
-        return null;
+        return theQueue.peekFirst();
     }
 
     /**

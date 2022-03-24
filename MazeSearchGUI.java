@@ -1,5 +1,9 @@
 
 /** 
+ * Name: Anh Bach
+ * Email: tbach@ucsd.edu
+ * Sources used: Oracle, Lecture Slides
+ * 
  * MazeSearchGUI.java
  * 
  * A program to search through a maze using DPS or BFS via a graphical user 
@@ -64,8 +68,13 @@ public class MazeSearchGUI extends JFrame implements ActionListener {
 
     // Offset to tell which order to explore neighbors (N, E, S, W) or
     // (up, right, down, left)
-    private final int[][] NEIGHBOR_ORDER = { { -1, 0 }, { 0, 1 },
-            { 1, 0 }, { 0, -1 } };
+    // private final int[][] NEIGHBOR_ORDER = { { -1, 0 }, { 0, 1 },
+    //         { 1, 0 }, { 0, -1 } };
+
+    // Offset to tell which order to explore neighbors (E, S, W, N) or
+    // (up, right, down, left)
+    private final int[][] NEIGHBOR_ORDER = { { 0, 1 }, { 1, 0 },
+        { 0, -1 }, { -1, 0 } };
 
     // Colors used for the cells
     private final Color COLOR_EMPTY = Color.DARK_GRAY;
@@ -249,10 +258,12 @@ public class MazeSearchGUI extends JFrame implements ActionListener {
         QueueInterface<Cell> theQueue = new MyQueue<Cell>(cells.length *
                 cells[0].length);
         // TODO: add the cell at row, col to the queue
+        theQueue.enqueue(cells[row][col]);
 
         // BFS algorithm
         while (theQueue.size() > 0) {
             // TODO: remove the cell from the queue and store it as currCell
+            Cell currCell = theQueue.dequeue();
 
             exploredCells.enqueue(currCell);
             // If the visited cell is the finish cell, we stop searching
@@ -273,6 +284,7 @@ public class MazeSearchGUI extends JFrame implements ActionListener {
                         nextCell.setVisited();
                         nextCell.setPrevious(currCell);
                         // TODO: add the next cell to the queue
+                        theQueue.enqueue(nextCell);
                     }
                 }
             }
@@ -300,10 +312,12 @@ public class MazeSearchGUI extends JFrame implements ActionListener {
         StackInterface<Cell> theStack = new MyStack<Cell>(cells.length *
                 cells[0].length);
         // TODO: add the cell at row, col to the stack
+        theStack.push(cells[row][col]);
 
         // DFS algorithm
         while (theStack.size() > 0) {
             // TODO: remove the cell from the stack and store it as currCell
+            Cell currCell = theStack.pop();
 
             exploredCells.enqueue(currCell);
             currCell.setVisited();
@@ -324,6 +338,7 @@ public class MazeSearchGUI extends JFrame implements ActionListener {
                             && !nextCell.isVisited())) {
                         nextCell.setPrevious(currCell);
                         // TODO: add the next cell to the stack
+                        theStack.push(nextCell);
                     }
                 }
             }
